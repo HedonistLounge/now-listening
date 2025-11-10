@@ -5,7 +5,7 @@
 <title>Hedonist Lounge — Home</title>
 <meta name="theme-color" content="#0b0b0c">
 <style>
-:root{--bg:#0b0b0c;--fg:#fff;--muted:#a7a7a7;--card:#131416;--border:rgba(255,255,255,.12);--accent:#19f0a8;--glow:#6c48ff}
+:root{--bg:#0b0b0c;--fg:#fff;--muted:#a7a7a7;--card:#131416;--border:rgba(255,255,255,.12)}
 *{box-sizing:border-box}html,body{height:100%}
 body{margin:0;background:
 radial-gradient(1200px 700px at 15% -10%,rgba(25,240,168,.08),transparent),
@@ -14,7 +14,8 @@ var(--bg);
 color:var(--fg);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
 .container{max-width:720px;margin:0 auto;padding:22px}
 .header{display:flex;align-items:center;gap:14px;margin:8px 0 18px}
-.logo{width:56px;height:56px;border-radius:16px;overflow:hidden;flex:0 0 56px;box-shadow:0 10px 30px rgba(25,240,168,.25)}
+.logo{width:60px;height:60px;border-radius:14px;overflow:hidden;flex:0 0 60px;box-shadow:0 10px 30px rgba(25,240,168,.25);background:#0d0e10;border:1px solid rgba(255,255,255,.08)}
+.logo img{width:100%;height:100%;object-fit:cover;display:block}
 .title h1{margin:0;font-size:clamp(22px,4vw,32px);letter-spacing:.2px}
 .title p{margin:4px 0 0;font-size:13px;color:var(--muted)}
 .card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,0));border:1px solid var(--border);border-radius:20px;box-shadow:0 24px 70px rgba(0,0,0,.5);overflow:hidden}
@@ -35,13 +36,14 @@ color:var(--fg);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-s
 .txt span{font-size:12px;color:var(--muted)}
 .hr{height:1px;border:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent);margin:10px 0}
 .footer{margin:18px 0 6px;text-align:center;color:var(--muted);font-size:12px}
-@media (max-width:560px){.container{padding:16px}}
 </style>
 </head>
 <body>
 <div class="container">
   <div class="header">
-    <img class="logo" alt="Hedonist" src="data:image/svg+xml;utf8,<?xml version='1.0'?><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%2319f0a8'/><stop offset='1' stop-color='%2300e0ff'/></linearGradient></defs><rect width='120' height='120' rx='20' fill='url(%23g)'/><text x='60' y='78' text-anchor='middle' font-family='Arial, Helvetica, sans-serif' font-size='64' fill='%230a0a0a'>♪</text></svg>">
+    <div class="logo">
+      <img src="H.png" alt="Hedonist Logo">
+    </div>
     <div class="title">
       <h1>Hedonist Lounge</h1>
       <p>Real nights • Budapest</p>
