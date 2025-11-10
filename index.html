@@ -11,16 +11,6 @@
 <link rel="preconnect" href="https://display.soundtrack.io" crossorigin>
 <link rel="dns-prefetch" href="//display.soundtrack.io">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
-
-<!-- Google Analytics 4 (GA4) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-VY0CKKGRDP"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-VY0CKKGRDP', { 'anonymize_ip': true });
-</script>
-
 <style>
 :root{--bg:#0b0b0c;--fg:#fff;--muted:#9b9b9b;--neon1:#19f0a8;--neon2:#6c48ff;--font:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -107,27 +97,4 @@ body{margin:0;color:var(--fg);font-family:var(--font);background:radial-gradient
 
       <div class="hr"></div>
       <h2 class="section-title">Feedback</h2>
-      <a class="btn" href="mailto:hedonistlounge@hotmail.com" rel="noopener"><div class="emoji">💭</div><div class="txt"><strong>Share a Thought</strong><span>We read everything</span></div></a>
-    </div>
-  </div>
-
-  <div class="footer" aria-label="copyright">© <span>Hedonist Lounge</span> — Budapest</div>
-</div>
-
-<div id="easter"></div>
-
-<script>
-document.addEventListener('DOMContentLoaded',function(){
-  const player=document.getElementById('player');
-  const toggleBtn=document.getElementById('togglePlayer');
-  const isHidden=localStorage.getItem('playerHidden')==='true';
-  if(isHidden){player.classList.add('hidden');toggleBtn.textContent='🎧 Show Player'}
-  toggleBtn.addEventListener('click',function(){
-    const hidden=player.classList.toggle('hidden');
-    toggleBtn.textContent=hidden?'🎧 Show Player':'🎧 Hide Player';
-    localStorage.setItem('playerHidden',hidden?'true':'false');
-  });
-
-  const easter=document.getElementById('easter');
-  const phrases=["you found the vibe","hedonist mode on","lights low, minds high","real nights only","glow with it"];
-  document.addEventListener('keydown',funct
+      <a class="btn" href="mailto:hedonistlounge@hotmail.com" rel="noopener"><div class="emoji">💭</div><div class="txt"><strong>Share a Thought</strong><span>We read everything</span></di
