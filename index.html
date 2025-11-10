@@ -1,239 +1,117 @@
 <!doctype html>
 <html lang="tr">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hedonist Lounge — Home</title>
-    <meta name="description" content="Hedonist Lounge — Real nights in Budapest. Explore events, playlists, and the live soundtrack playing now.">
-    <meta name="theme-color" content="#0b0b0c">
-    <link rel="icon" type="image/png" href="H.png">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hedonist Lounge — Home</title>
+<meta name="description" content="Hedonist Lounge — Real nights in Budapest. Explore events, playlists, and the live soundtrack playing now.">
+<meta name="theme-color" content="#0b0b0c">
+<link rel="icon" type="image/png" href="H.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
-
-    <style>
-        :root {
-            --bg: #0b0b0c;
-            --fg: #fff;
-            --muted: #a7a7a7;
-            --glow1: #19f0a8;
-            --glow2: #6c48ff;
-            --card-bg: rgba(22, 23, 26, 0.7);
-            --btn-bg: rgba(23, 24, 26, 0.7);
-            --border: rgba(255, 255, 255, 0.1);
-            --border-hover: rgba(255, 255, 255, 0.2);
-            --font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-        }
-
-        * { box-sizing: border-box; }
-        html, body { height: 100%; }
-
-        body {
-            margin: 0;
-            background: var(--bg);
-            color: var(--fg);
-            font-family: var(--font-family);
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        body::before, body::after {
-            content: "";
-            position: fixed;
-            z-index: -1;
-            filter: blur(80px);
-            opacity: 0.25;
-        }
-
-        body::before {
-            width: 500px; height: 500px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, var(--glow1), transparent 60%);
-            top: -15%; left: -10%;
-            animation: float 20s ease-in-out infinite;
-        }
-
-        body::after {
-            width: 450px; height: 450px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 60% 40%, var(--glow2), transparent 60%);
-            bottom: -15%; right: -10%;
-            animation: float 24s ease-in-out infinite reverse;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(25px); }
-        }
-
-        .container { max-width: 720px; margin: 0 auto; padding: 22px; position: relative; z-index: 2; }
-
-        .header {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin: 8px 0 18px;
-        }
-
-        .logo {
-            width: 60px;
-            height: 60px;
-            border-radius: 14px;
-            overflow: hidden;
-            flex: 0 0 60px;
-            box-shadow: 0 10px 30px rgba(25, 240, 168, 0.25);
-            background: #0d0e10;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .logo img { width: 100%; height: 100%; object-fit: contain; display: block; }
-
-        .title h1 {
-            margin: 0;
-            font-size: clamp(22px, 4vw, 32px);
-            font-weight: 800;
-            letter-spacing: .2px;
-        }
-
-        .title p { margin: 4px 0 0; font-size: 14px; color: var(--muted); }
-
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
-            overflow: hidden;
-            backdrop-filter: blur(12px);
-        }
-
-        .card-head {
-            display: flex; align-items: center; gap: 10px;
-            padding: 12px 16px; border-bottom: 1px solid var(--border);
-        }
-
-        .card-head-title {
-            font-weight: 700; letter-spacing: .2px; color: #e8e8e8; font-size: 13px;
-        }
-
-        .dot {
-            width: 9px; height: 9px; border-radius: 50%;
-            background: radial-gradient(circle at 40% 40%, #3cffc3, #00e39a);
-            box-shadow: 0 0 12px rgba(25, 240, 168, 0.8), 0 0 22px rgba(25, 240, 168, 0.4);
-            animation: pulse 1.6s ease-in-out infinite;
-        }
-
-        @keyframes pulse { 0%,100%{transform:scale(1)}50%{transform:scale(1.25)} }
-
-        .card-body { padding: 14px; }
-
-        .player {
-            display: flex; justify-content: center;
-            background: #0e0e10; border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 16px;
-        }
-
-        .player-inner { transform-origin: top center; }
-
-        .player-frame {
-            width: 420px; height: 760px; border: 0; display: block;
-            background: #0e0e10; border-radius: 12px;
-        }
-
-        .section { margin: 18px 0; }
-        .section-title { font-size: 16px; font-weight: 800; color: #fff; margin: 20px 0 12px; }
-
-        .list { display: grid; gap: 12px; }
-
-        .btn {
-            display: flex; align-items: center; gap: 14px; padding: 16px;
-            border-radius: 16px; text-decoration: none; color: var(--fg);
-            background: var(--btn-bg); border: 1px solid var(--border);
-            backdrop-filter: blur(12px);
-            transition: all .2s ease;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 14px 34px rgba(0, 0, 0, 0.35);
-            border-color: var(--border-hover);
-            background: rgba(30, 31, 34, 0.8);
-        }
-
-        .emoji { font-size: 18px; }
-        .txt { display: flex; flex-direction: column; }
-        .txt strong { font-size: 16px; font-weight: 700; }
-        .txt span { font-size: 13px; color: var(--muted); }
-
-        .hr { height: 1px; border: 0; background: linear-gradient(90deg, transparent, var(--border), transparent); margin: 10px 0; }
-        .footer { margin: 18px 0 6px; text-align: center; color: var(--muted); font-size: 13px; }
-    </style>
+<style>
+:root {
+  --bg:#0b0b0c;--fg:#fff;--muted:#a7a7a7;
+  --glow1:#19f0a8;--glow2:#6c48ff;
+  --card-bg:rgba(22,23,26,0.7);--btn-bg:rgba(23,24,26,0.7);
+  --border:rgba(255,255,255,0.1);--border-hover:rgba(255,255,255,0.2);
+  --font:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+}
+*{box-sizing:border-box}html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);position:relative;overflow-x:hidden}
+body::before,body::after{content:"";position:fixed;z-index:-1;filter:blur(80px);opacity:.25}
+body::before{width:500px;height:500px;border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--glow1),transparent 60%);top:-15%;left:-10%;animation:float 20s ease-in-out infinite}
+body::after{width:450px;height:450px;border-radius:50%;background:radial-gradient(circle at 60% 40%,var(--glow2),transparent 60%);bottom:-15%;right:-10%;animation:float 24s ease-in-out infinite reverse}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(25px)}}
+.container{max-width:720px;margin:0 auto;padding:22px;position:relative;z-index:2}
+.header{display:flex;align-items:center;gap:16px;margin:8px 0 18px}
+.logo{width:60px;height:60px;border-radius:14px;overflow:hidden;flex:0 0 60px;box-shadow:0 10px 30px rgba(25,240,168,.25);background:#0d0e10;border:1px solid rgba(255,255,255,.08);transition:transform .3s ease,box-shadow .3s ease}
+.logo:hover{transform:scale(1.05);box-shadow:0 0 25px rgba(25,240,168,.5)}
+.logo img{width:100%;height:100%;object-fit:contain;display:block}
+.title h1{margin:0;font-size:clamp(22px,4vw,32px);font-weight:800}
+.title p{margin:4px 0 0;font-size:14px;color:var(--muted)}
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:20px;box-shadow:0 24px 70px rgba(0,0,0,.5);overflow:hidden;backdrop-filter:blur(12px);position:relative}
+.card-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 16px;border-bottom:1px solid var(--border)}
+.card-head-title{font-weight:700;letter-spacing:.2px;color:#e8e8e8;font-size:13px;display:flex;align-items:center;gap:8px}
+.dot{width:9px;height:9px;border-radius:50%;background:radial-gradient(circle at 40% 40%,#3cffc3,#00e39a);box-shadow:0 0 12px rgba(25,240,168,.8),0 0 22px rgba(25,240,168,.4);animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.25)}}
+.toggle-btn{background:none;border:1px solid var(--border);color:var(--muted);font-size:13px;border-radius:10px;padding:4px 10px;cursor:pointer;transition:all .2s ease}
+.toggle-btn:hover{color:var(--fg);border-color:var(--border-hover);background:rgba(255,255,255,.05)}
+.player{display:flex;justify-content:center;background:#0e0e10;border:1px solid rgba(255,255,255,.06);border-radius:16px;overflow:hidden;transition:max-height .5s ease,opacity .4s ease}
+.player.hidden{max-height:0;opacity:0;pointer-events:none}
+.player-frame{width:420px;height:760px;border:0;display:block;background:#0e0e10;border-radius:12px}
+.section{margin:18px 0}
+.section-title{font-size:16px;font-weight:800;color:#fff;margin:20px 0 12px}
+.list{display:grid;gap:12px}
+.btn{display:flex;align-items:center;gap:14px;padding:16px;border-radius:16px;text-decoration:none;color:var(--fg);background:var(--btn-bg);border:1px solid var(--border);backdrop-filter:blur(12px);transition:all .2s ease}
+.btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(0,0,0,.35);border-color:var(--border-hover);background:rgba(30,31,34,.8)}
+.emoji{font-size:18px}
+.txt{display:flex;flex-direction:column}
+.txt strong{font-size:16px;font-weight:700}
+.txt span{font-size:13px;color:var(--muted)}
+.hr{height:1px;border:0;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:10px 0}
+.footer{text-align:center;color:var(--muted);font-size:13px;margin:18px 0 6px}
+</style>
 </head>
+
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="logo"><img alt="Hedonist Logo" src="H.png" /></div>
-            <div class="title">
-                <h1>Hedonist Lounge</h1>
-                <p>Real nights • Budapest</p>
-            </div>
-        </div>
-
-        <div class="card section">
-            <div class="card-head"><span class="dot"></span><span class="card-head-title">NOW PLAYING</span></div>
-            <div class="card-body">
-                <div class="player"><div id="playerScale" class="player-inner">
-                    <iframe class="player-frame" src="https://display.soundtrack.io/BLLARJ" allowfullscreen loading="eager" referrerpolicy="no-referrer"></iframe>
-                </div></div>
-            </div>
-        </div>
-
-        <div class="section">
-           <div class="list">
-
-    <h2 class="section-title">Find Us</h2>
-    <a class="btn" href="https://www.facebook.com/hedonistbudapest2/events" target="_blank">
-        <div class="emoji">🗓️</div>
-        <div class="txt"><strong>Events</strong><span>What’s on this week</span></div>
-    </a>
-    
-    <div class="hr"></div>
-
-    <h2 class="section-title">Playlists</h2>
-                <a class="btn" href="https://open.spotify.com/playlist/26tdudnXR3SUfCjyElU09Z?si=iNsLSwXdTMqQRrrr4ZC6Iw" target="_blank"><div class="emoji">☀️</div><div class="txt"><strong>Goood Morning Budapest</strong><span>Smooth sunrise vibes</span></div></a>
-                <a class="btn" href="https://open.spotify.com/playlist/04n8porc6EUwHQ3fr5iN6i?si=ushVdx3OQa2KVB0pgLihfQ" target="_blank"><div class="emoji">🌞</div><div class="txt"><strong>Have a lovely day</strong><span>Daytime groove</span></div></a>
-                <a class="btn" href="https://open.spotify.com/playlist/592sxbGZtkpqE8T3t4ocGL?si=E_U8CaREQh6b4aboeX5CkQ&pi=EBFfo2PvRg2HF" target="_blank"><div class="emoji">🌙</div><div class="txt"><strong>Night is young</strong><span>Dark rhythm</span></div></a>
-
-                <div class="hr"></div>
-
-                <h2 class="section-title">Follow Us</h2>
-                <a class="btn" href="https://www.facebook.com/hedonistbudapest2" target="_blank"><div class="emoji">📘</div><div class="txt"><strong>Facebook</strong><span>Updates & events</span></div></a>
-                <a class="btn" href="https://www.instagram.com/hedonistbudapest_" target="_blank"><div class="emoji">📸</div><div class="txt"><strong>Instagram</strong><span>Stories & moments</span></div></a>
-            </div>
-        </div>
-
-        <div class="footer">© Hedonist Lounge — Budapest</div>
+<div class="container">
+  <div class="header">
+    <div class="logo"><img src="H.png" alt="Hedonist Logo"></div>
+    <div class="title">
+      <h1>Hedonist Lounge</h1>
+      <p>Real nights • Budapest</p>
     </div>
+  </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const BASE_WIDTH = 420, BASE_HEIGHT = 760;
-            const playerInner = document.getElementById('playerScale');
-            const cardBody = document.querySelector('.card-body');
-            if (!playerInner || !cardBody) return;
+  <div class="card section">
+    <div class="card-head">
+      <div class="card-head-title"><span class="dot"></span>NOW PLAYING</div>
+      <button id="togglePlayer" class="toggle-btn">🎧 Hide Player</button>
+    </div>
+    <div class="card-body">
+      <div id="player" class="player">
+        <iframe class="player-frame" src="https://display.soundtrack.io/BLLARJ" allowfullscreen loading="eager" referrerpolicy="no-referrer"></iframe>
+      </div>
+    </div>
+  </div>
 
-            function fitPlayerToContainer() {
-                const maxWidth = cardBody.clientWidth - 4;
-                const maxHeight = Math.min(window.innerHeight * 0.62, 620);
-                const scale = Math.min(maxWidth / BASE_WIDTH, maxHeight / BASE_HEIGHT);
-                playerInner.style.transform = `scale(${scale})`;
-                cardBody.style.height = `${BASE_HEIGHT * scale + 16}px`;
-            }
+  <div class="section">
+    <div class="list">
+      <h2 class="section-title">Find Us</h2>
+      <a class="btn" href="https://www.facebook.com/hedonistbudapest2/events" target="_blank"><div class="emoji">🗓️</div><div class="txt"><strong>Events</strong><span>What’s on this week</span></div></a>
 
-            window.addEventListener('resize', fitPlayerToContainer, { passive: true });
-            window.addEventListener('orientationchange', fitPlayerToContainer, { passive: true });
-            fitPlayerToContainer();
-        });
-    </script>
+      <div class="hr"></div>
+      <h2 class="section-title">Playlists</h2>
+      <a class="btn" href="https://open.spotify.com/playlist/26tdudnXR3SUfCjyElU09Z?si=iNsLSwXdTMqQRrrr4ZC6Iw" target="_blank"><div class="emoji">☀️</div><div class="txt"><strong>Goood Morning Budapest</strong><span>Smooth sunrise vibes</span></div></a>
+      <a class="btn" href="https://open.spotify.com/playlist/04n8porc6EUwHQ3fr5iN6i?si=ushVdx3OQa2KVB0pgLihfQ" target="_blank"><div class="emoji">🌞</div><div class="txt"><strong>Have a lovely day</strong><span>Daytime groove</span></div></a>
+      <a class="btn" href="https://open.spotify.com/playlist/592sxbGZtkpqE8T3t4ocGL?si=E_U8CaREQh6b4aboeX5CkQ&pi=EBFfo2PvRg2HF" target="_blank"><div class="emoji">🌙</div><div class="txt"><strong>Night is young</strong><span>Dark rhythm</span></div></a>
+
+      <div class="hr"></div>
+      <h2 class="section-title">Follow Us</h2>
+      <a class="btn" href="https://www.facebook.com/hedonistbudapest2" target="_blank"><div class="emoji">📘</div><div class="txt"><strong>Facebook</strong><span>Updates & events</span></div></a>
+      <a class="btn" href="https://www.instagram.com/hedonistbudapest_" target="_blank"><div class="emoji">📸</div><div class="txt"><strong>Instagram</strong><span>Stories & moments</span></div></a>
+
+      <div class="hr"></div>
+      <h2 class="section-title">Feedback</h2>
+      <a class="btn" href="mailto:hedonistlounge@hotmail.com" target="_blank"><div class="emoji">💭</div><div class="txt"><strong>Share a Thought</strong><span>We read everything</span></div></a>
+    </div>
+  </div>
+
+  <div class="footer">© Hedonist Lounge — Budapest</div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const player = document.getElementById('player');
+  const toggleBtn = document.getElementById('togglePlayer');
+  toggleBtn.addEventListener('click', () => {
+    const hidden = player.classList.toggle('hidden');
+    toggleBtn.textContent = hidden ? '🎧 Show Player' : '🎧 Hide Player';
+  });
+});
+</script>
 </body>
 </html>
