@@ -7,6 +7,9 @@
 <meta name="description" content="Hedonist Lounge — Real nights in Budapest. Explore events, playlists, and the live soundtrack playing now.">
 <meta name="theme-color" content="#0b0b0c">
 <link rel="icon" type="image/png" href="H.png">
+<link rel="preconnect" href="https://display.soundtrack.io" crossorigin>
+<link rel="dns-prefetch" href="//display.soundtrack.io">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#0b0b0c;--fg:#fff;--muted:#9b9b9b;--neon1:#19f0a8;--neon2:#6c48ff;--font:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
@@ -32,7 +35,7 @@ body{margin:0;color:var(--fg);font-family:var(--font);background:radial-gradient
 
 .player{display:flex;justify-content:center;align-items:center;border:none;background:transparent;box-shadow:none;transition:height .35s ease,opacity .3s ease;overflow:hidden;height:220px}
 .player.hidden{height:0;opacity:0;padding:0;margin:0}
-.player-frame{width:100%;max-width:560px;height:210px;border:0}
+.player-frame{width:100%;max-width:560px;height:210px;border:0;transform:translateZ(0)}
 
 .section{margin:22px 0}
 .section-title{font-size:16px;font-weight:800;letter-spacing:.8px;color:#fff;margin:18px 0 12px;text-shadow:0 0 8px rgba(25,240,168,.22)}
