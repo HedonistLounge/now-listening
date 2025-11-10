@@ -22,9 +22,49 @@
   --border-hover:rgba(255,255,255,.25);
   --font:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
 }
+
+/* === AURORA BACKGROUND === */
+body {
+  margin: 0;
+  color: var(--fg);
+  font-family: var(--font);
+  background: radial-gradient(circle at 15% 25%, rgba(25,240,168,0.06), transparent 70%),
+              radial-gradient(circle at 80% 75%, rgba(108,72,255,0.07), transparent 70%),
+              var(--bg);
+  background-size: 200% 200%;
+  animation: aurora 18s ease-in-out infinite alternate;
+  overflow-x: hidden;
+  position: relative;
+}
+
+@keyframes aurora {
+  0% { background-position: 20% 20%, 80% 80%; }
+  50% { background-position: 80% 30%, 30% 90%; }
+  100% { background-position: 40% 80%, 60% 30%; }
+}
+
+/* === FILM GRAIN OVERLAY === */
+body::after {
+  content: "";
+  position: fixed;
+  top:0;left:0;right:0;bottom:0;
+  pointer-events: none;
+  z-index:1;
+  opacity: 0.08;
+  background-image: repeating-radial-gradient(circle at center, rgba(255,255,255,0.05) 0, rgba(0,0,0,0) 1px);
+  animation: grainMove 2s steps(2) infinite;
+  mix-blend-mode: overlay;
+}
+
+@keyframes grainMove {
+  0%,100% { transform: translate(0,0); }
+  25% { transform: translate(-2%, 1%); }
+  50% { transform: translate(1%, -1%); }
+  75% { transform: translate(-1%, -2%); }
+}
+
+/* === MAIN LAYOUT === */
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;background:var(--bg);color:var(--fg);font-family:var(--font);overflow-x:hidden;scroll-behavior:smooth}
-canvas#bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-2;pointer-events:none}
 .container{max-width:720px;margin:0 auto;padding:24px;position:relative;z-index:2}
 .header-link{text-decoration:none;color:inherit;display:block}
 .header{display:flex;align-items:center;gap:16px;margin-bottom:20px}
@@ -33,6 +73,8 @@ canvas#bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-2;pointer-
 .logo img{width:100%;height:100%;object-fit:contain}
 .title h1{font-size:clamp(22px,4vw,34px);font-weight:800;letter-spacing:.4px;text-shadow:0 0 12px rgba(25,240,168,.3),0 0 18px rgba(108,72,255,.25)}
 .title p{margin-top:4px;color:var(--muted);font-size:14px;letter-spacing:.4px}
+
+/* === CARD & PLAYER === */
 .card{background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));border:1px solid var(--border);
 border-radius:22px;box-shadow:0 0 50px rgba(0,0,0,.6),inset 0 0 30px rgba(25,240,168,.03);
 backdrop-filter:blur(14px);overflow:hidden;transition:box-shadow .3s ease,border .3s ease}
@@ -45,11 +87,38 @@ box-shadow:0 0 15px rgba(25,240,168,.9);animation:pulse 1.8s ease-in-out infinit
 .toggle-btn{background:none;border:1px solid var(--border);color:var(--muted);font-size:13px;border-radius:12px;
 padding:5px 12px;cursor:pointer;transition:all .25s ease;backdrop-filter:blur(10px)}
 .toggle-btn:hover{color:var(--fg);border-color:var(--border-hover);box-shadow:0 0 12px rgba(25,240,168,.4)}
-.card-body{padding:18px}
-.player{display:flex;justify-content:center;align-items:center;background:#0e0e10;border-radius:18px;border:1px solid rgba(255,255,255,.05);
-transition:height .5s ease,opacity .4s ease;overflow:hidden;height:520px}
+.card-body{padding:16px}
+
+/* 🎧 Player Neon Glow */
+.player{
+  display:flex;justify-content:center;align-items:center;
+  background:rgba(15,15,17,0.7);
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.05);
+  box-shadow:0 0 12px rgba(25,240,168,.15), inset 0 0 20px rgba(25,240,168,.08);
+  transition:height .5s ease,opacity .4s ease,box-shadow 2s linear;
+  overflow:hidden;
+  height:360px;
+  position:relative;
+}
+.player::before{
+  content:"";
+  position:absolute;inset:-2px;
+  border-radius:18px;
+  background:linear-gradient(120deg,var(--neon1),var(--neon2),var(--neon1));
+  filter:blur(14px);
+  opacity:.15;
+  z-index:0;
+  animation:glowflow 10s linear infinite;
+}
+@keyframes glowflow{
+  0%{transform:rotate(0deg);}
+  100%{transform:rotate(360deg);}
+}
 .player.hidden{height:0;opacity:0;padding:0;margin:0;border:0}
-.player-frame{width:100%;max-width:380px;height:480px;border:0;transform:scale(.85);transform-origin:top center}
+.player-frame{position:relative;z-index:2;width:100%;max-width:300px;height:330px;border:0;transform:scale(.85);transform-origin:top center}
+
+/* === BUTTONS & FOOTER === */
 .section{margin:26px 0}
 .section-title{font-size:16px;font-weight:800;letter-spacing:.8px;color:#fff;margin:22px 0 14px;text-shadow:0 0 10px rgba(25,240,168,.3)}
 .list{display:grid;gap:14px}
@@ -70,8 +139,6 @@ opacity:0;transition:opacity .3s ease}
 </head>
 
 <body>
-<canvas id="bg"></canvas>
-
 <div class="container">
   <a href="#" class="header-link">
     <div class="header">
@@ -132,44 +199,6 @@ document.addEventListener('DOMContentLoaded',()=>{
     localStorage.setItem('playerHidden',hidden?'true':'false');
   });
 });
-
-const canvas=document.getElementById('bg');
-const ctx=canvas.getContext('2d');
-let particles=[],w,h;
-
-function resize(){
-  w=canvas.width=window.innerWidth;
-  h=canvas.height=window.innerHeight;
-  particles=Array.from({length:80},()=>({
-    x:Math.random()*w,
-    y:Math.random()*h,
-    r:Math.random()*2+0.6,
-    dx:(Math.random()-.5)*0.3,
-    dy:(Math.random()-.5)*0.3,
-    c:Math.random()<0.5?'rgba(25,240,168,0.5)':'rgba(108,72,255,0.5)'
-  }));
-}
-resize();
-window.addEventListener('resize',resize);
-
-function draw(){
-  ctx.fillStyle='rgba(11,11,12,0.25)';
-  ctx.fillRect(0,0,w,h);
-  for(let p of particles){
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fillStyle=p.c;
-    ctx.shadowColor=p.c;
-    ctx.shadowBlur=18;
-    ctx.fill();
-    p.x+=p.dx;
-    p.y+=p.dy;
-    if(p.x<0||p.x>w)p.dx*=-1;
-    if(p.y<0||p.y>h)p.dy*=-1;
-  }
-  requestAnimationFrame(draw);
-}
-draw();
 </script>
 </body>
 </html>
